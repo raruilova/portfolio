@@ -1,42 +1,20 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SlideUp } from "./SlideUp";
 import { BsGithub, BsArrowUpRightSquare } from "react-icons/bs";
+import { AllProjects } from "./AllProjects";
+import { Projects } from "@/interfaces/projects";
 
-export const projects = [
-  {
-    name: "Thankful Thoughts",
-    description:
-      "ThankfulThoughts is a web app that generates an appreciative sentence of something or someone you are thankful for.",
-    image: "/images/thankfulthoughts.png",
-    github: "https://github.com/hqasmei/thankful-thoughts",
-    link: "https://thankfulthoughts.io/",
-  },
-  {
-    name: "PlatoIO",
-    description: "PlatoIO is a to do list app that built using the PERN stack.",
-    image: "/images/platoio.png",
-    github: "https://github.com/hqasmei/platoio",
-    link: "https://platoio.com/register",
-  },
-  {
-    name: "Kator Family Photos",
-    description: "Kator Family Photos is a photos and video digitization service in the LA area.",
-    image: "/images/familyphotos.png",
-    github: "https://github.com/hqasmei/katorfamilyphotos",
-    link: "https://katorfamilyphotos.com/",
-  },
-  {
-    name: "Kator Family Photos",
-    description: "Kator Family Photos is a photos and video digitization service in the LA area.",
-    image: "/images/familyphotos.png",
-    github: "https://github.com/hqasmei/katorfamilyphotos",
-    link: "https://katorfamilyphotos.com/",
-  },
-];
+interface ProjectsSectionProps {
+  listProjects: Projects[]
+}
 
-export const ProjectsSection = () => {
+export const ProjectsSection = ({listProjects}: ProjectsSectionProps) => {
+  //const [projects, setProjects] = useState<Projects[]>([]);
+  
+  //setProjects(projects.slice(0,5));
   return (
     <section id="projects">
       <h1 className="my-10 text-center font-bold text-4xl">
@@ -45,7 +23,9 @@ export const ProjectsSection = () => {
       </h1>
 
       <div className="flex flex-col space-y-28">
-        {projects.map((project, idx) => {
+        
+        { listProjects.map((project, idx) => {
+
           return (
             <div key={idx}>
               <SlideUp offset="-300px 0px -300px 0px">
@@ -87,6 +67,7 @@ export const ProjectsSection = () => {
           );
         })}
       </div>
+      <button>More ...</button>
     </section>
   );
 };

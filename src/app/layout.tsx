@@ -2,6 +2,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Nabvar } from "@/components/Navbar";
+import { ProjectsProvider } from "@/context/ProjectsProvider";
 import "@/styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
@@ -18,9 +19,11 @@ export default function RootLayout({
       <Header />
       <body className={inter.className}>
         <ThemeProvider enableSystem={true} attribute="class">
-          <Nabvar />
-          {children}
-          <Footer />
+          <ProjectsProvider>
+            <Nabvar />
+            {children}
+            <Footer />
+          </ProjectsProvider>
         </ThemeProvider>
       </body>
     </html>
