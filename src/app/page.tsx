@@ -3,7 +3,6 @@ import { AboutSection } from "@/components/AboutSection";
 import { HeroSection } from "@/components/HeroSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { useProjects } from "@/hooks/useProjects";
-import { Projects } from "@/interfaces/projects";
 
 export default function Home() {
   const { projects, listProjects } = useProjects();

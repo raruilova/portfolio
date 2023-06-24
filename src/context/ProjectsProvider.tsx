@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import { ReactNode } from "react"
 import { ProjectsContext } from "./ProjectsContext"
 import { Projects } from "@/interfaces/projects";
 
@@ -19,6 +19,7 @@ interface ProjectsProviderProps {
  */
 
 export const ProjectsProvider = ({ children }:ProjectsProviderProps) => {
+  
     const projects = [
         {
           name: "Thankful Thoughts",
