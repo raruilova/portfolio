@@ -1,9 +1,10 @@
 "use client";
 import { Projects } from "@/interfaces/projects";
+import { ProjectResponse } from "@/interfaces/projectsResponse";
 import { createContext } from "react";
 
 interface ProjectsContextProps {
-    projects: Projects[],
+    projects: ProjectResponse[],
     listProjects: Projects[]
 }
 

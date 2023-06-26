@@ -3,5 +3,5 @@ export interface Projects {
     description: string
     image: string
     github: string
-    link: string
+    link: string | null | undefined
 }
