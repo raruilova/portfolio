@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { ProjectsContext } from "./ProjectsContext";
 import { Projects } from "@/interfaces/projects";
 import { ProjectResponse } from "@/interfaces/projectsResponse";
+import { ProjectImage } from "@/interfaces/projectImage";
 
 interface ProjectsProviderProps {
   children: ReactNode;
@@ -22,8 +23,9 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
   const [projects, setProjects] = useState<ProjectResponse[]>([]);
 
   const getProjects = async () => {
-    const api: string ="https://api.github.com/users/raruilova/repos?sort=updated";
-    const res = await fetch(api);
+    const api1: string =
+      "https://api.github.com/users/raruilova/repos?sort=updated";
+    const res = await fetch(api1);
     const data: ProjectResponse[] = await res.json();
     setProjects(data);
   };
@@ -32,19 +34,19 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
     getProjects();
   }, []);
 
-  const projectsFiltered = projects.map(project => {
+  const projectsFiltered: Projects[] = projects.map((project) => {
     return {
       name: project.name,
       description: project.description,
-      image: project.owner.avatar_url,
+      image: `${project.url}/contents/src/preview/download_url`,
       github: project.url,
-      link: project.homepage,
-    }
+      link: String(project.homepage),
+    };
   });
 
   const listProjects: Projects[] = projectsFiltered.slice(0, 5);
   return (
-    <ProjectsContext.Provider value={{ projects, listProjects }}>
+    <ProjectsContext.Provider value={{ projectsFiltered, listProjects }}>
       {children}
     </ProjectsContext.Provider>
   );

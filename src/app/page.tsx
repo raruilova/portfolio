@@ -5,12 +5,12 @@ import { ProjectsSection } from "@/components/ProjectsSection";
 import { useProjects } from "@/hooks/useProjects";
 
 export default function Home() {
-  const { projects, listProjects } = useProjects();
+  const { projectsFiltered, listProjects } = useProjects();
   return (
     <main className="mx-auto max-w-3xl px-4 sm:px-6 md:max-w-5xl">
       <HeroSection />
       <AboutSection />
-      <ProjectsSection listProjects={listProjects.length <= 5 ? listProjects : projects }/>
+      <ProjectsSection listProjects={listProjects.length <= 5 ? listProjects : projectsFiltered }/>
     </main>
   );
 }

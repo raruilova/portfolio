@@ -28,17 +28,18 @@ export const Nabvar = () => {
   const [navbar, setNavbar] = useState<boolean>(false);
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
-  
+
   return (
     <header className="w-full mx-auto  px-4 sm:px-20 sticky top-0 z-50 shadow bg-white dark:bg-stone-900 dark:border-b dark:border-stone-600">
       <div className="justify-between md:items-center md:flex">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <Route to="home">
-              <div className="container flex items-center space-x-2">
-                <Link href="/" className="text-2xl font-bold">Robinson Ruilova</Link>
-              </div>
-            </Route>
+            <div className="container flex items-center space-x-2">
+              <Link href="/" className="text-2xl font-bold">
+                Robinson Ruilova
+              </Link>
+            </div>
+
             <div className="md:hidden">
               <button
                 className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"

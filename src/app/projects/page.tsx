@@ -4,9 +4,9 @@ import { ProjectsSection } from "@/components/ProjectsSection";
 import { useProjects } from "@/hooks/useProjects";
 
 const Projects = () => {
-    const {projects} = useProjects();
+    const {projectsFiltered} = useProjects();
     return (
-        <ProjectsSection listProjects={projects} />
+        <ProjectsSection listProjects={projectsFiltered} />
     )
 }
 

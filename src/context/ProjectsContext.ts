@@ -4,7 +4,7 @@ import { ProjectResponse } from "@/interfaces/projectsResponse";
 import { createContext } from "react";
 
 interface ProjectsContextProps {
-    projects: ProjectResponse[],
+    projectsFiltered: Projects[],
     listProjects: Projects[]
 }
 
