@@ -11,10 +11,7 @@ interface ProjectItemProps {
 }
 
 export const ProjectItem = ({project}:ProjectItemProps) => {
-    const { getProjectsImages, projectImage } = useProjects();
-    useEffect(() => {
-        getProjectsImages(project.name);
-    }, [projectImage]);
+   
     return (
         <div>
               <SlideUp offset="-300px 0px -300px 0px">

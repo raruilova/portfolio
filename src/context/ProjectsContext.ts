@@ -8,7 +8,7 @@ interface ProjectsContextProps {
     projectsFiltered: Projects[],
     listProjects: Projects[],
     projectImage: ProjectImage[],
-    getProjectsImages: (repo:string) => void;
+    //getProjectsImages: (repo:string) => void;
 }
 
 export const ProjectsContext = createContext({} as ProjectsContextProps);

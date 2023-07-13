@@ -21,6 +21,7 @@ interface ProjectsProviderProps {
 
 export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
   const [projects, setProjects] = useState<ProjectResponse[]>([]);
+  const [githubImage, setGithubImage] = useState<Array<string>>([]);
   const [projectImage, setProjectImage] = useState<ProjectImage[]>([]);
 
   const getProjects = async () => {
@@ -29,18 +30,36 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
     const res = await fetch(api1);
     const data: ProjectResponse[] = await res.json();
     setProjects(data);
+
+    const githubPostImagesData = await Promise.all(
+      projects.map((post) => {
+        return fetch(
+          `https://api.github.com/repos/raruilova/${post.name}/contents/src/preview`
+        )
+      })
+    );
+    setGithubImage(githubPostImagesData.map(i => i.url));
   };
+
+  /*const getProjectsImages = githubImage.map(async (img) => {
+    const res = await fetch(img);
+    const data = res.json();
+    console.log(data.then(i => console.log(i)))
+
+  })*/
+
+ 
 
   useEffect(() => {
     getProjects();
   }, []);
 
-  const getProjectsImages = async (repo: string) => {
-    const api2: string = `https://api.github.com/repos/raruilova/${repo}/contents/src/preview`;
+  /*const getProjectsImages = await (repo: string) => {
+    const api2: string = 
     const res2 = await fetch(api2);
     const data2: ProjectImage = await res2.json();
     setProjectImage([...projectImage, data2]);
-  };
+  };*/
 
   const projectsFiltered: Projects[] = projects.map((project) => {
     return {
@@ -51,12 +70,12 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
       link: String(project.homepage),
     };
   });
-  console.log(projectImage);
+  
 
   const listProjects: Projects[] = projectsFiltered.slice(0, 5);
   return (
     <ProjectsContext.Provider
-      value={{ projectsFiltered, listProjects, projectImage, getProjectsImages }}
+      value={{ projectsFiltered, listProjects, projectImage }}
     >
       {children}
     </ProjectsContext.Provider>
