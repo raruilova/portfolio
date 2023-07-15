@@ -33,12 +33,13 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
 
     const githubPostImagesData = await Promise.all(
       projects.map((post) => {
-        return fetch(
+        const res = fetch(
           `https://api.github.com/repos/raruilova/${post.name}/contents/src/preview`
-        )
+        );
+        return res.then((i) => i.json());
       })
     );
-    setGithubImage(githubPostImagesData.map(i => i.url));
+    setGithubImage(githubPostImagesData);
   };
 
   /*const getProjectsImages = githubImage.map(async (img) => {
@@ -47,8 +48,6 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
     console.log(data.then(i => console.log(i)))
 
   })*/
-
- 
 
   useEffect(() => {
     getProjects();
@@ -70,7 +69,6 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
       link: String(project.homepage),
     };
   });
-  
 
   const listProjects: Projects[] = projectsFiltered.slice(0, 5);
   return (
