@@ -2,7 +2,6 @@ import { ReactNode, useEffect, useState } from "react";
 import { ProjectsContext } from "./ProjectsContext";
 import { Projects } from "@/interfaces/projects";
 import { ProjectResponse } from "@/interfaces/projectsResponse";
-import { ProjectImage } from "@/interfaces/projectImage";
 
 interface ProjectsProviderProps {
   children: ReactNode;
@@ -21,8 +20,9 @@ interface ProjectsProviderProps {
 
 export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
   const [projects, setProjects] = useState<ProjectResponse[]>([]);
-  const [githubImage, setGithubImage] = useState<Array<string>>([]);
-  const [projectImage, setProjectImage] = useState<ProjectImage[]>([]);
+  //const [githubImage, setGithubImage] = useState<Array<ProjectImage>>([]);
+  //const [projectImage, setProjectImage] = useState<ProjectImage[]>([]);
+  //const [projectWithImage, setProjectWithImage] = useState<Projects[]>([]);
 
   const getProjects = async () => {
     const api1: string =
@@ -31,7 +31,9 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
     const data: ProjectResponse[] = await res.json();
     setProjects(data);
 
-    const githubPostImagesData = await Promise.all(
+    /** TODO */
+
+    /*const githubPostImagesData:ProjectImage[] = await Promise.all(
       projects.map((post) => {
         const res = fetch(
           `https://api.github.com/repos/raruilova/${post.name}/contents/src/preview`
@@ -39,32 +41,24 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
         return res.then((i) => i.json());
       })
     );
-    setGithubImage(githubPostImagesData);
+    setGithubImage(githubPostImagesData);*/
   };
-
-  /*const getProjectsImages = githubImage.map(async (img) => {
-    const res = await fetch(img);
-    const data = res.json();
-    console.log(data.then(i => console.log(i)))
-
-  })*/
 
   useEffect(() => {
     getProjects();
   }, []);
 
-  /*const getProjectsImages = await (repo: string) => {
-    const api2: string = 
-    const res2 = await fetch(api2);
-    const data2: ProjectImage = await res2.json();
-    setProjectImage([...projectImage, data2]);
-  };*/
+  // TODO
+  /*const githubProjectImage = githubImage.flatMap(img => img);
+  const projectsWithImage = [...projects, ...githubProjectImage];
+
+  console.log(projectsWithImage);*/
 
   const projectsFiltered: Projects[] = projects.map((project) => {
     return {
       name: project.name,
       description: project.description,
-      image: "/thankfulthoughts.png",
+      image: "/images/bg.jpg",
       github: project.url,
       link: String(project.homepage),
     };
@@ -72,9 +66,7 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
 
   const listProjects: Projects[] = projectsFiltered.slice(0, 5);
   return (
-    <ProjectsContext.Provider
-      value={{ projectsFiltered, listProjects, projectImage }}
-    >
+    <ProjectsContext.Provider value={{ projectsFiltered, listProjects }}>
       {children}
     </ProjectsContext.Provider>
   );

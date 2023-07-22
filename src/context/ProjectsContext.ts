@@ -7,7 +7,7 @@ import { createContext } from "react";
 interface ProjectsContextProps {
     projectsFiltered: Projects[],
     listProjects: Projects[],
-    projectImage: ProjectImage[],
+    //projectImage: ProjectImage[],
     //getProjectsImages: (repo:string) => void;
 }
 

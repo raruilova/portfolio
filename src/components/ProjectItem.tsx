@@ -3,8 +3,6 @@ import { SlideUp } from "./SlideUp"
 import Image from "next/image";
 import Link from "next/link";
 import { BsArrowUpRightSquare, BsGithub } from "react-icons/bs";
-import { useProjects } from "@/hooks/useProjects";
-import { useEffect } from "react";
 
 interface ProjectItemProps {
     project: Projects
