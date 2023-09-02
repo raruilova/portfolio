@@ -59,8 +59,8 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
       name: project.name,
       description: project.description,
       image: "/images/bg.jpg",
-      github: project.url,
-      link: String(project.homepage),
+      github: project.svn_url,
+      link: String(project.homepage)
     };
   });
 

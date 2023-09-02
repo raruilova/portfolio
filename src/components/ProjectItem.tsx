@@ -36,10 +36,11 @@ export const ProjectItem = ({project}:ProjectItemProps) => {
                         />
                       </Link>
                       <Link href={project.link} target="_blank">
-                        <BsArrowUpRightSquare
+                        {project.link !== "null" ? (<BsArrowUpRightSquare
                           size={30}
                           className="hover:-translate-y-1 transition-transform cursor-pointer"
-                        />
+                        />) : null}
+                        
                       </Link>
                     </div>
                   </div>
