@@ -56,11 +56,17 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
 
   const projectsFiltered: Projects[] = projects.map((project) => {
     return {
-      name: project.name,
+      name: project.name.includes("-")
+        ? project.name[0].toUpperCase() +
+          project.name.slice(1).toLowerCase().split("-").join(" ")
+        : project.name.includes("_")
+        ? project.name[0].toUpperCase() +
+          project.name.slice(1).toLowerCase().split("_").join(" ")
+        : project.name,
       description: project.description,
       image: "/images/bg.jpg",
       github: project.svn_url,
-      link: String(project.homepage)
+      link: String(project.homepage),
     };
   });
 
