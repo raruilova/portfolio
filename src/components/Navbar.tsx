@@ -15,11 +15,11 @@ const NAV_ITEMS: navItem[] = [
     page: "home",
   },
   {
-    label: "About",
+    label: "Acerca de mi",
     page: "about",
   },
   {
-    label: "Projects",
+    label: "Proyectos",
     page: "projects",
   },
 ];

@@ -20,39 +20,27 @@ interface ProjectsProviderProps {
 
 export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
   const [projects, setProjects] = useState<ProjectResponse[]>([]);
-  //const [githubImage, setGithubImage] = useState<Array<ProjectImage>>([]);
-  //const [projectImage, setProjectImage] = useState<ProjectImage[]>([]);
-  //const [projectWithImage, setProjectWithImage] = useState<Projects[]>([]);
 
-  const getProjects = async () => {
-    const api1: string =
-      "https://api.github.com/users/raruilova/repos?sort=updated";
-    const res = await fetch(api1);
-    const data: ProjectResponse[] = await res.json();
-    setProjects(data);
-
-    /** TODO */
-
-    /*const githubPostImagesData:ProjectImage[] = await Promise.all(
-      projects.map((post) => {
-        const res = fetch(
-          `https://api.github.com/repos/raruilova/${post.name}/contents/src/preview`
-        );
-        return res.then((i) => i.json());
-      })
-    );
-    setGithubImage(githubPostImagesData);*/
+  const getProjects = async (): Promise<void> => {
+    try {
+      const api1: string =
+        "https://api.github.com/users/raruilova/repos?sort=updated";
+      const res = await fetch(api1);
+      const data: ProjectResponse[] = await res.json();
+      const api2: string =
+        "https://api.github.com/users/raruilova/repos?type=member";
+      const res2 = await fetch(api2);
+      const data2: ProjectResponse[] = await res2.json();
+      const project: ProjectResponse[] = [...data, ...data2];
+      setProjects(project);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     getProjects();
   }, []);
-
-  // TODO
-  /*const githubProjectImage = githubImage.flatMap(img => img);
-  const projectsWithImage = [...projects, ...githubProjectImage];
-
-  console.log(projectsWithImage);*/
 
   const projectsFiltered: Projects[] = projects.map((project) => {
     return {
@@ -72,7 +60,9 @@ export const ProjectsProvider = ({ children }: ProjectsProviderProps) => {
 
   const listProjects: Projects[] = projectsFiltered.slice(0, 5);
   return (
-    <ProjectsContext.Provider value={{ projectsFiltered, listProjects }}>
+    <ProjectsContext.Provider
+      value={{ getProjects, projectsFiltered, listProjects }}
+    >
       {children}
     </ProjectsContext.Provider>
   );

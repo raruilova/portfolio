@@ -5,10 +5,9 @@ import { ProjectResponse } from "@/interfaces/projectsResponse";
 import { createContext } from "react";
 
 interface ProjectsContextProps {
+    getProjects: (api:string) => void
     projectsFiltered: Projects[],
     listProjects: Projects[],
-    //projectImage: ProjectImage[],
-    //getProjectsImages: (repo:string) => void;
 }
 
 export const ProjectsContext = createContext({} as ProjectsContextProps);

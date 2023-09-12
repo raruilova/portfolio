@@ -13,16 +13,13 @@ export const ProjectsSection = ({ listProjects }: ProjectsSectionProps) => {
   return (
     <section id="projects">
       <h1 className="my-10 text-center font-bold text-4xl">
-        Projects
+        Proyectos
         <hr className="w-6 h-1 mx-auto my-4 bg-teal-500 border-0 rounded"></hr>
       </h1>
 
       <div className="flex flex-col space-y-28">
         {listProjects.map((project, idx) => {
-          console.log(project.image)
-          return (
-            <ProjectItem project={project} key={idx}/>
-          );
+          return <ProjectItem project={project} key={idx} />;
         })}
       </div>
       {listProjects.length <= 5 && (
@@ -30,7 +27,7 @@ export const ProjectsSection = ({ listProjects }: ProjectsSectionProps) => {
           onClick={() => router.push("/projects")}
           className="text-neutral-100 font-semibold px-6 py-3 bg-teal-600 rounded shadow hover:bg-teal-700 mx-auto my-4"
         >
-          More..
+          Más proyectos..
         </button>
       )}
     </section>
