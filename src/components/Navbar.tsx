@@ -29,6 +29,18 @@ export const Nabvar = () => {
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
 
+  const handleDownloadCv = () => {
+    fetch("Robinson_Ruilova_CV.pdf").then(response => {
+      response.blob().then(blob => {
+        const fileUrl = window.URL.createObjectURL(blob);
+        let alink = document.createElement("a");
+        alink.href = fileUrl;
+        alink.download = "Robinson_Ruilova_CV.pdf";
+        alink.click();
+      })
+    })
+  }
+
   return (
     <header className="w-full mx-auto  px-4 sm:px-20 sticky top-0 z-50 shadow bg-white dark:bg-stone-900 dark:border-b dark:border-stone-600">
       <div className="justify-between md:items-center md:flex">
@@ -77,6 +89,11 @@ export const Nabvar = () => {
                   </Route>
                 );
               })}
+              <button className="text-neutral-100 font-semibold px-3 py-3 bg-teal-600 rounded shadow hover:bg-teal-700 mr-4 my-0"
+              onClick={handleDownloadCv}
+              >
+                Descarga mi CV
+              </button>
               {currentTheme === "dark" ? (
                 <button
                   onClick={() => setTheme("light")}
